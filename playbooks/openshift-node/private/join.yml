@@ -64,11 +64,22 @@
       key: oo_nodes_use_{{ (openshift_use_calico | default(False)) | ternary('calico','nothing') }}
     changed_when: False
 
+  - group_by:
+      key: oo_nodes_use_{{ (openshift_use_aci | default(False)) | ternary('aci','nothing') }}
+    changed_when: False
+
+- name: Configure Aci node
+  hosts: oo_nodes_use_aci
+  roles:
+  - role: aci
+    when: openshift_use_aci | default(false) | bool
+
 - name: Additional calico node config
   hosts: oo_nodes_use_calico
   roles:
   - role: calico_node
     when: openshift_use_calico | default(false) | bool
+
 
 - name: Node Join Checkpoint End
   hosts: all

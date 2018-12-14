@@ -123,7 +123,7 @@ networkConfig:
   clusterNetworks:
   - cidr: {{ openshift_cluster_network_cidr }}
     hostSubnetLength: {{ openshift_host_subnet_length }}
-{% if r_openshift_master_use_openshift_sdn or r_openshift_master_use_nuage or r_openshift_master_use_contiv or r_openshift_master_use_kuryr or r_openshift_master_sdn_network_plugin_name == 'cni' %}
+{% if r_openshift_master_use_openshift_sdn or r_openshift_master_use_nuage or r_openshift_master_use_contiv or r_openshift_master_use_kuryr or r_openshift_master_use_aci or r_openshift_master_sdn_network_plugin_name == 'cni' %}
   networkPluginName: {{ r_openshift_master_sdn_network_plugin_name_default }}
 {% endif %}
 # serviceNetworkCIDR must match kubernetesMasterConfig.servicesSubnet

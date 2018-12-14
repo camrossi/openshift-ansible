@@ -80,6 +80,9 @@ default_r_openshift_node_os_firewall_allow:
 - service: OpenShift OVS sdn
   port: 4789/udp
   cond: openshift_use_openshift_sdn | bool
+- service: ACI OpFlex
+  port: 8472/udp
+  cond: openshift_use_aci | bool
 - service: Calico BGP Port
   port: 179/tcp
   cond: "{{ openshift_node_use_calico }}"
@@ -138,6 +141,9 @@ openshift_node_use_contiv: "{{ openshift_node_use_contiv_default }}"
 
 openshift_node_use_kuryr_default: "{{ openshift_use_kuryr | default(False) }}"
 openshift_node_use_kuryr: "{{ openshift_node_use_kuryr_default }}"
+
+openshift_node_use_aci_default: "{{ openshift_use_aci | default(False) }}"
+openshift_node_use_aci: "{{ openshift_node_use_aci_default }}"
 
 openshift_node_data_dir_default: "{{ openshift_data_dir | default('/var/lib/origin') }}"
 openshift_node_data_dir: "{{ openshift_node_data_dir_default }}"

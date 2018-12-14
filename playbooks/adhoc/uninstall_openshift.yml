@@ -120,6 +120,13 @@
       register: result
       until: result is succeeded
 
+    - name: Remove aci files
+      file: path={{ item }} state=absent
+      with_items:
+      - /var/lib/opflex-agent-ovs
+      - /var/run/openvswitch
+      when: openshift_use_aci | default(false) | bool
+
     - shell: systemctl reset-failed
       changed_when: False
 
